@@ -89,3 +89,7 @@ const productos = [
 { id: 10, nombre: 'Destornillador', precio: 20000, categoria: 'Herramientas', stock: 9 }
 ];
 
+//Reto 4#:
+productos.forEach((producto, indice) => {
+console.log(`${indice + 1}. ${producto.nombre} - ${producto.precio} - stock: ${producto.stock}`);
+});
