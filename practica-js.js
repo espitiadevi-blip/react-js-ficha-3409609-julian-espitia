@@ -157,3 +157,12 @@ const valor_total_inventario = productos.reduce(
 console.log(valor_total_inventario)
 console.log("bien")
 
+//Reto 8#
+const productoActualizado = {
+...productos[1],
+stock: 0,
+precio: 2000
+};
+const estado = productoActualizado.stock > 0 ? 'Disponible' : 'Agotado';
+console.log(`El producto ${productoActualizado.nombre} cuesta ${productoActualizado.precio} y tiene un stock de ${productoActualizado.stock}`);
+
