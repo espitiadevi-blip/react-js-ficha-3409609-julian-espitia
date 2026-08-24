@@ -103,3 +103,28 @@ const nombresMayuscula = productos.map(producto => producto.nombre.toUpperCase()
 console.log(nombresMayuscula);
 const resumenProductos = productos.map(producto => `${producto.nombre} cuesta $${producto.precio}`);
 console.log(resumenProductos);
+
+//Reto 6#:
+const disponibles = productos.filter(producto => producto.stock > 0);
+const producto3 = productos.find(producto => producto.id === 3);
+console.log(disponibles)
+console.log(producto3)
+
+// Filtrar productos con precio mayor a $100.000.
+const Productos_Precio = productos.filter(producto => producto.precio > 10000)
+console.log(Productos_Precio)
+// Filtrar productos con precio entre $50.000 y $200.000.
+const Productos_Precio_Rango = productos.filter(producto => producto.precio >= 50000 && producto.precio <=200000)
+console.log(Productos_Precio_Rango)
+// Filtrar únicamente una categoría escogida por ti.
+const categoria_periferico = productos.filter(producto => producto.categoria == "Perifericos")
+console.log(categoria_periferico)
+// Buscar el producto con id 5.
+const producto_id_cinco = productos.find(producto => producto.id === 5)
+console.log(producto_id_cinco)
+// Crear una función buscarProducto(id) que use find() y retorne el producto.
+const buscarProducto = (id_buscado) => {
+    return productos.find(producto => producto.id === id_buscado);
+}
+console.log(buscarProducto(1))
+console.log("bien")
