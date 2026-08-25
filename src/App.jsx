@@ -16,12 +16,28 @@ export default function App() {
         <p className="meta-info">Productos disponibles: {productosDisponibles}</p>
         <p className="meta-info">Valor del inventario: ${valorInventario}</p>
       </header>
+      <section className='container-product'>
+        <section className='all-products'>
+          <h2>Todos los productos</h2>
+          <section className="products-container">
+            {productos.map(producto => (
+              <ProductoCard key={producto.id} producto={producto} />
+            ))}
+          </section>
+        </section>
 
-      <section className="products-container">
-        {productos.map(producto => (
-          <ProductoCard key={producto.id} producto={producto} />
-        ))}
+        <section className='disponible-products'>
+          <h2>Porductos Disponibles</h2>
+          <section className="products-container">
+            {productos.filter(producto => producto.stock > 0).map(producto => (
+              <ProductoCard key={producto.id} producto={producto} />
+            ))}
+          </section>
+
+        </section>
+
       </section>
+
     </main>
   );
 }
