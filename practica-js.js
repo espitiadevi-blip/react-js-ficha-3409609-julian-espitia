@@ -123,10 +123,10 @@ console.log(categoria_periferico)
 const producto_id_cinco = productos.find(producto => producto.id === 5)
 console.log(producto_id_cinco)
 // Crear una función buscarProducto(id) que use find() y retorne el producto.
-const buscarProducto = (id_buscado) => {
+/*const buscarProducto = (id_buscado) => {
     return productos.find(producto => producto.id === id_buscado);
 }
-console.log(buscarProducto(1))
+console.log(buscarProducto(1))*/
 
 //Reto 7#
 const hayAgotados = productos.some(producto => producto.stock === 0);
@@ -155,7 +155,6 @@ console.log(producto_precio_stockcero)
 const valor_total_inventario = productos.reduce(
     (total,producto) => total + producto.precio,0)
 console.log(valor_total_inventario)
-console.log("bien")
 
 //Reto 8#
 const productoActualizado = {
@@ -165,3 +164,11 @@ precio: 2000
 };
 const estado = productoActualizado.stock > 0 ? 'Disponible' : 'Agotado';
 console.log(`El producto ${productoActualizado.nombre} cuesta ${productoActualizado.precio} y tiene un stock de ${productoActualizado.stock}`);
+
+
+// Reto de Autonomia
+function buscarProducto(id){
+    return productos.find(producto => producto.id === id)
+}
+console.log(buscarProducto(5))
+console.log("bien")
