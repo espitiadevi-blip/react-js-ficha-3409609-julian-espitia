@@ -1,16 +1,19 @@
-# React + Vite
+# Tienda Tecnológica - Panel de Inventario
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Aplicación web interactiva que despliega un catálogo de productos en tiempo real y calcula métricas globales del inventario utilizando métodos modernos de JavaScript (ES6+).
 
-Currently, two official plugins are available:
+## Funcionalidades Principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* **Visualización Dinámica de Productos:** Renderizado de tarjetas de catálogo a partir de una estructura de datos basada en un arreglo de objetos.
+* **Cálculo Automático de Métricas:**
+  * **Productos Disponibles:** Conteo automatizado de ítems con stock activo.
+  * **Valor Total del Inventario:** Cálculo financiero acumulado (`precio * stock`) mediante el método `.reduce()`.
+* **Control de Stock y Estado:** Validación de disponibilidad utilizando operadores ternarios para indicar el estado ("Disponible" o "Agotado") según el número de existencias.
+* **Clasificación por Categorías:** Organización por tipos de producto (Periféricos, Pantallas, Muebles, Decoración y Herramientas).
 
-## React Compiler
+## Conceptos de JavaScript Implementados
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+* Métodos iterativos de arreglos (`map`, `filter`, `reduce`, `find`).
+* Desestructuración de objetos y operador *Spread* (`...`).
+* Plantillas de texto (*Template Literals*).
+* Manipulación dinámica del DOM.
