@@ -1,3 +1,7 @@
+const formatearPrecio = precio => {
+return precio.toLocaleString("es-CO");
+};
+
 export const ProductoCard = ({ producto }) => {
   const {nombre,categoria,precio,stock} = producto;
   const esDisponible = stock > 0;
@@ -9,8 +13,8 @@ export const ProductoCard = ({ producto }) => {
       <h2 className="product-title">{nombre}</h2>
       <div className="product-info">
         <p>Categoría: {categoria}</p>
-        <p>Precio: {producto.precio ? `$${precio}` : '-'}</p>
-        <p>Stock: {producto.stock !== null ? stock : '-'}</p>
+        <p>Precio: {precio ? `$${precio}` : '-'}</p>
+        <p>Stock: {stock !== null ? stock : '-'}</p>
       </div>
       <div className={`product-status ${esDisponible ? 'disponible' : 'agotado'}`}>
         {esDisponible ? 'Disponible' : 'Agotado'}
