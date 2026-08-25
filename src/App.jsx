@@ -1,8 +1,10 @@
 import { productos } from './data/productos';
 import { ProductoCard } from './components/ProductoCard';
 import './App.css';
+import { useState } from "react";
 
 export default function App() {
+  const [busqueda, setBusqueda] = useState("");
   const productosDisponibles = productos.filter(p => p.stock > 0).length;
   const hayAgotados = productos.some(p => (p.stock || 0) === 0);
   const valorInventario = productos.reduce(
@@ -10,8 +12,13 @@ export default function App() {
     0
   );
 
+  const productosFiltrados = productos.filter(producto =>
+    producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
+  );
+
   return (
     <main className="container">
+      <input type="text" placeholder="Buscar producto..." value={busqueda} onChange={(evento) => { setBusqueda(evento.target.value); }} />
       <header className="header">
         <h1>Tienda tecnológica</h1>
         <p className="meta-info">Productos disponibles: {productosDisponibles}</p>
@@ -25,9 +32,16 @@ export default function App() {
         <section className='all-products'>
           <h2>Todos los productos</h2>
           <section className="products-container">
-            {productos.map(producto => (
-              <ProductoCard key={producto.id} producto={producto} />
-            ))}
+            {productosFiltrados.length === 0 ? (
+              <p>No se encontraron productos.</p>
+            ) : (
+              productosFiltrados.map(producto => (
+                <ProductoCard
+                  key={producto.id}
+                  producto={producto}
+                />
+              ))
+            )}
           </section>
         </section>
 
