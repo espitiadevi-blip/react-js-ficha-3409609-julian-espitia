@@ -7,5 +7,15 @@ export const productos = [
   { id: 6, nombre: 'Sofá', precio: 1250000, categoria: 'Muebles', stock: 4 },
   { id: 7, nombre: 'Audífonos', precio: 140000, categoria: 'Periféricos', stock: 0 },
   { id: 8, nombre: 'Lámpara', precio: 70000, categoria: 'Decoración', stock: 7 },
-  { id: 9, nombre: 'Cuadro', precio: null, categoria: 'Decoración', stock: null }
+  { id: 9, nombre: 'Cuadro', precio: null, categoria: 'Decoración', stock: null },
+  { id: 10, nombre: 'Pad Mouse', precio: 35000, categoria: 'Periféricos', stock: 12 },
+  { id: 11, nombre: 'Webcam', precio: 180000, categoria: 'Periféricos', stock: 3 },
+  { id: 12, nombre: 'Escritorio Gamer', precio: 520000, categoria: 'Muebles', stock: 2 },
+  { id: 13, nombre: 'Estantería', precio: 290000, categoria: 'Muebles', stock: 0 },
+  { id: 14, nombre: 'Proyector', precio: 1100000, categoria: 'Pantallas', stock: 1 },
+  { id: 15, nombre: 'Televisor 55"', precio: 1600000, categoria: 'Pantallas', stock: 4 },
+  { id: 16, nombre: 'Planta Decorativa', precio: 45000, categoria: 'Decoración', stock: 8 },
+  { id: 17, nombre: 'Espejo de Pared', precio: 120000, categoria: 'Decoración', stock: 3 },
+  { id: 18, nombre: 'Micrófono USB', precio: 230000, categoria: 'Periféricos', stock: 0 },
+  { id: 19, nombre: 'Soporte Monitor', precio: 95000, categoria: 'Periféricos', stock: 6 }
 ];
