@@ -1,26 +1,27 @@
-import ProductoCard from './components/ProductoCard';
 import { productos } from './data/productos';
+import { ProductoCard } from './components/ProductoCard';
 import './App.css';
-function App() {
-const disponibles = productos.filter(producto => producto.stock > 0);
-const valorInventario = productos.reduce(
-(total, producto) => total + producto.precio * producto.stock,
-0
-);
-return (
-<main className="contenedor">
-<h1>Tienda tecnológica</h1>
-<p>Productos disponibles: {disponibles.length}</p>
-<p>Valor del inventario: ${valorInventario}</p>
-<section className="productos">
-{productos.map(producto => (
-<ProductoCard
-key={producto.id}
-producto={producto}
-/>
-))}
-</section>
-</main>
-);
+
+export default function App() {
+  const productosDisponibles = productos.filter(p => p.stock > 0).length;
+  const valorInventario = productos.reduce(
+    (acc, p) => acc + ((p.precio || 0) * (p.stock || 0)),
+    0
+  );
+
+  return (
+    <main className="container">
+      <header className="header">
+        <h1>Tienda tecnológica</h1>
+        <p className="meta-info">Productos disponibles: {productosDisponibles}</p>
+        <p className="meta-info">Valor del inventario: ${valorInventario}</p>
+      </header>
+
+      <section className="products-container">
+        {productos.map(producto => (
+          <ProductoCard key={producto.id} producto={producto} />
+        ))}
+      </section>
+    </main>
+  );
 }
-export default App;
