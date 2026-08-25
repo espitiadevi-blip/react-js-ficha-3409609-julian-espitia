@@ -7,6 +7,7 @@ export default function App() {
   const [soloDisponibles, setSoloDisponibles] = useState(false);
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
+
   const productosDisponibles = productos.filter(p => p.stock > 0).length;
   const hayAgotados = productos.some(p => (p.stock || 0) === 0);
   const valorInventario = productos.reduce(
@@ -16,86 +17,81 @@ export default function App() {
 
   const limpiarFiltros = () => {
     setBusqueda("");
-setCategoria("Todas");
-setSoloDisponibles(false);
-  }
+    setCategoria("Todas");
+    setSoloDisponibles(false);
+  };
+
   const productosFiltrados = productos.filter(producto => {
-    const coincideNombre = producto.nombre.toLowerCase().includes(busqueda.toLowerCase()
-    );
+    const coincideNombre = producto.nombre
+      .toLowerCase()
+      .includes(busqueda.toLowerCase());
     const coincideCategoria = categoria === "Todas" || producto.categoria === categoria;
     const coincideStock = !soloDisponibles || producto.stock > 0;
 
-    return (
-      coincideNombre &&
-      coincideCategoria &&
-      coincideStock
-    );
+    return coincideNombre && coincideCategoria && coincideStock;
   });
+
   return (
     <main className="container">
-      <input type="text" placeholder="Buscar producto..." value={busqueda} onChange={(evento) => { setBusqueda(evento.target.value); }} />
-      <select value={categoria} onChange={(evento) => setCategoria(evento.target.value)}>
-        <option value="Todas">Todas</option>
-
-        <option value="Periféricos">Periféricos</option>
-
-        <option value="Pantallas">Pantallas</option>
-      </select>
-      <label>
-        <input type="checkbox" checked={soloDisponibles} onChange={(evento) => setSoloDisponibles(
-          evento.target.checked
-        )
-        }
-        />
-        Mostrar únicamente disponibles
-      </label>
-      <button onClick={limpiarFiltros}>Limpiar Filtros</button>
-
-
       <header className="header">
-        <h1>Tienda tecnológica</h1>
-        <p className="meta-info">Productos disponibles: {productosDisponibles}</p>
-        <p className="meta-info">Valor del inventario: ${valorInventario.toLocaleString()}</p>
-        <p className="meta-info">
-          ¿Hay productos agotados? : {hayAgotados ? 'Sí' : 'No'}
-        </p>
+        <h1>Tienda Tecnológica</h1>
       </header>
 
-      <section className='container-product'>
-        <section className='all-products'>
-          <h2>Todos los productos</h2>
-          <p>Productos encontrados:{productosFiltrados.length}</p>
-          <section className="products-container">
-            {productosFiltrados.length === 0 ? (
-              <p>No se encontraron productos.</p>
-            ) : (
-              productosFiltrados.map(producto => (
-                <ProductoCard
-                  key={producto.id}
-                  producto={producto}
-                />
-              ))
-            )}
-          </section>
-        </section>
+      {/* Barra superior de herramientas y filtros */}
+      <div className="toolbar">
+        <input 
+          type="text" 
+          className="search-input"
+          placeholder="Buscar producto..." 
+          value={busqueda} 
+          onChange={(evento) => setBusqueda(evento.target.value)} 
+        />
+        <select className="select-input" value={categoria} onChange={(evento) => setCategoria(evento.target.value)}>
+          <option value="Todas">Todas</option>
+          <option value="Periféricos">Periféricos</option>
+          <option value="Pantallas">Pantallas</option>
+        </select>
+        <label className="checkbox-label">
+          <input 
+            type="checkbox" 
+            checked={soloDisponibles} 
+            onChange={(evento) => setSoloDisponibles(evento.target.checked)}
+          />
+          Mostrar únicamente disponibles
+        </label>
+        <button className="btn-clean" onClick={limpiarFiltros}>Limpiar Filtros</button>
+      </div>
 
-        <section className='disponible-products'>
-          <h2>Productos Disponibles</h2>
-          <section className="products-container">
-            {productos.filter(producto => producto.stock > 0).map(producto => (
-              <ProductoCard key={producto.id} producto={producto} />
-            ))}
-          </section>
-        </section>
+      {/* Tarjetas KPI de información general */}
+      <section className="kpi-container">
+        <div className="kpi-card">
+          <span className="kpi-label">Productos disponibles</span>
+          <span className="kpi-value">{productosDisponibles}</span>
+        </div>
+        <div className="kpi-card">
+          <span className="kpi-label">Valor del inventario</span>
+          <span className="kpi-value">${valorInventario.toLocaleString("es-CO")}</span>
+        </div>
+        <div className="kpi-card">
+          <span className="kpi-label">¿Hay productos agotados?</span>
+          <span className={`kpi-value ${hayAgotados ? 'text-red' : 'text-green'}`}>
+            {hayAgotados ? 'Sí' : 'No'}
+          </span>
+        </div>
+      </section>
 
-        <section className='info-productos'>
-          <h3>Información:</h3>
-          <section className="products-container">
-            {productos.filter(producto => !producto.stock).map(producto => (
+      {/* Lista general de productos en Grid */}
+      <section className="catalog-section">
+        <h2>Todos los productos</h2>
+        <div className="products-grid">
+          {productosFiltrados.length === 0 ? (
+            <p className="no-results">No se encontraron productos.</p>
+          ) : (
+            productosFiltrados.map(producto => (
               <ProductoCard key={producto.id} producto={producto} />
-            ))}
-          </section>
-        </section>
+            ))
+          )}
+        </div>
       </section>
     </main>
   );
