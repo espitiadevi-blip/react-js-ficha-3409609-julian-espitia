@@ -1,17 +1,21 @@
 export const ProductoCard = ({ producto }) => {
-  const esDisponible = producto.stock > 0;
+  const {nombre,categoria,precio,stock} = producto;
+  const esDisponible = stock > 0;
+  const mostrarProducto = () => {alert(`Seleccionaste ${nombre}`);
+};
 
   return (
     <article className="product-card">
-      <h2 className="product-title">{producto.nombre}</h2>
+      <h2 className="product-title">{nombre}</h2>
       <div className="product-info">
-        <p>Categoría: {producto.categoria}</p>
-        <p>Precio: {producto.precio ? `$${producto.precio}` : '-'}</p>
-        <p>Stock: {producto.stock !== null ? producto.stock : '-'}</p>
+        <p>Categoría: {categoria}</p>
+        <p>Precio: {producto.precio ? `$${precio}` : '-'}</p>
+        <p>Stock: {producto.stock !== null ? stock : '-'}</p>
       </div>
       <div className={`product-status ${esDisponible ? 'disponible' : 'agotado'}`}>
         {esDisponible ? 'Disponible' : 'Agotado'}
       </div>
+      <button onClick={mostrarProducto} disabled={stock === 0}>{stock > 0 ? "Ver producto" : "Agotado"}</button>
     </article>
   );
 };
