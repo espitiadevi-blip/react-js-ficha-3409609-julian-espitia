@@ -1,12 +1,14 @@
-import { productos } from './data/productos';
+import { productos as productosIniciales } from './data/productos';
 import { ProductoCard } from './components/ProductoCard';
 import './App.css';
 import { useState } from "react";
+import FormularioProducto from "./components/FormularioProducto";
 
 export default function App() {
   const [soloDisponibles, setSoloDisponibles] = useState(false);
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
+  const [productos, setProductos] = useState(productosIniciales);
 
   const productosDisponibles = productos.filter(p => p.stock > 0).length;
   const hayAgotados = productos.some(p => (p.stock || 0) === 0);
@@ -93,6 +95,7 @@ export default function App() {
           )}
         </div>
       </section>
+      <FormularioProducto />
     </main>
   );
 }
