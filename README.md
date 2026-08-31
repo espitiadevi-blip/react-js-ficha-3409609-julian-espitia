@@ -17,3 +17,12 @@ Aplicación web interactiva que despliega un catálogo de productos en tiempo re
 * Desestructuración de objetos y operador *Spread* (`...`).
 * Plantillas de texto (*Template Literals*).
 * Manipulación dinámica del DOM.
+
+## Taller 3
+La aplicación ahora permite:
+- Agregar productos
+- Validar formularios
+- Eliminar productos
+- Modificar stock
+- Calcular inventario dinámicamente
+- Gestionar estado con useState
