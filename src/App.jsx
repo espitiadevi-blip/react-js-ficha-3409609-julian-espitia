@@ -9,6 +9,12 @@ export default function App() {
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
   const [productos, setProductos] = useState(productosIniciales);
+  const eliminarProducto = (id) => {
+  const nuevaLista = productos.filter(
+  producto => producto.id !== id
+  );
+  setProductos(nuevaLista);
+  };
 
   const productosDisponibles = productos.filter(p => p.stock > 0).length;
   const hayAgotados = productos.some(p => (p.stock || 0) === 0);
