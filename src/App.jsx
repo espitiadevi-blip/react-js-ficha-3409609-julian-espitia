@@ -1,3 +1,4 @@
+```jsx
 import { productos as productosIniciales } from "./data/productos";
 import { ProductoCard } from "./components/ProductoCard";
 import "./App.css";
@@ -18,19 +19,23 @@ export default function App() {
 
   const valorInventario = productos.reduce(
     (total, producto) =>
-      total +
-      (producto.precio || 0) * (producto.stock || 0),
+      total + (producto.precio || 0) * (producto.stock || 0),
     0
   );
 
   const agregarProducto = (nuevoProducto) => {
-    setProductos([
-      ...productos,
-      nuevoProducto
-    ]);
+    setProductos([...productos, nuevoProducto]);
   };
 
   const eliminarProducto = (id) => {
+    const confirmar = window.confirm(
+      "¿Estás seguro de que deseas eliminar este producto?"
+    );
+
+    if (!confirmar) {
+      return;
+    }
+
     const nuevaLista = productos.filter(
       (producto) => producto.id !== id
     );
@@ -39,21 +44,16 @@ export default function App() {
   };
 
   const modificarStock = (id, cambio) => {
-    const nuevosProductos = productos.map(
-      (producto) => {
-        if (producto.id === id) {
-          return {
-            ...producto,
-            stock: Math.max(
-              0,
-              producto.stock + cambio
-            )
-          };
-        }
-
-        return producto;
+    const nuevosProductos = productos.map((producto) => {
+      if (producto.id === id) {
+        return {
+          ...producto,
+          stock: Math.max(0, (producto.stock || 0) + cambio)
+        };
       }
-    );
+
+      return producto;
+    });
 
     setProductos(nuevosProductos);
   };
@@ -64,40 +64,36 @@ export default function App() {
     setSoloDisponibles(false);
   };
 
-  const productosFiltrados = productos.filter(
-    (producto) => {
-      const coincideNombre =
-        producto.nombre
-          .toLowerCase()
-          .includes(
-            busqueda.toLowerCase()
-          );
+  const quitarTildes = (texto) => {
+    return texto
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  };
 
-      const coincideCategoria =
-        categoria === "Todas" ||
-        producto.categoria === categoria;
+  const productosFiltrados = productos.filter((producto) => {
+    const nombreProducto = quitarTildes(producto.nombre);
+    const textoBusqueda = quitarTildes(busqueda);
 
-      const coincideStock =
-        !soloDisponibles ||
-        producto.stock > 0;
+    const coincideNombre = nombreProducto.includes(textoBusqueda);
 
-      return (
-        coincideNombre &&
-        coincideCategoria &&
-        coincideStock
-      );
-    }
-  );
+    const coincideCategoria =
+      categoria === "Todas" ||
+      producto.categoria === categoria;
+
+    const coincideStock =
+      !soloDisponibles || producto.stock > 0;
+
+    return coincideNombre && coincideCategoria && coincideStock;
+  });
 
   return (
     <main className="container">
-
       <header className="header">
         <h1>Tienda Tecnológica</h1>
       </header>
 
       <div className="toolbar">
-
         <input
           type="text"
           className="search-input"
@@ -115,33 +111,23 @@ export default function App() {
             setCategoria(evento.target.value)
           }
         >
-          <option value="Todas">
-            Todas
-          </option>
-
-          <option value="Periféricos">
-            Periféricos
-          </option>
-
-          <option value="Pantallas">
-            Pantallas
-          </option>
+          <option value="Todas">Todas</option>
+          <option value="Periféricos">Periféricos</option>
+          <option value="Pantallas">Pantallas</option>
+          <option value="Muebles">Muebles</option>
+          <option value="Decoración">Decoración</option>
         </select>
 
         <label className="checkbox-label">
-
           <input
             type="checkbox"
             checked={soloDisponibles}
             onChange={(evento) =>
-              setSoloDisponibles(
-                evento.target.checked
-              )
+              setSoloDisponibles(evento.target.checked)
             }
           />
 
           Mostrar únicamente disponibles
-
         </label>
 
         <button
@@ -150,11 +136,9 @@ export default function App() {
         >
           Limpiar Filtros
         </button>
-
       </div>
 
       <section className="kpi-container">
-
         <div className="kpi-card">
           <span className="kpi-label">
             Productos registrados
@@ -184,45 +168,31 @@ export default function App() {
             ${valorInventario.toLocaleString("es-CO")}
           </span>
         </div>
-
       </section>
 
       <section className="catalog-section">
-
         <h2>Todos los productos</h2>
 
         <div className="products-grid">
-
           {productosFiltrados.length === 0 ? (
-
             <p className="no-results">
               No se encontraron productos.
             </p>
-
           ) : (
-
-            productosFiltrados.map(
-              (producto) => (
-                <ProductoCard
-                  key={producto.id}
-                  producto={producto}
-                  onEliminar={eliminarProducto}
-                  onModificarStock={modificarStock}
-                />
-              )
-            )
-
+            productosFiltrados.map((producto) => (
+              <ProductoCard
+                key={producto.id}
+                producto={producto}
+                onEliminar={eliminarProducto}
+                onModificarStock={modificarStock}
+              />
+            ))
           )}
-
         </div>
-
       </section>
 
-      <FormularioProducto
-        onAgregar={agregarProducto}
-      />
-
+      <FormularioProducto onAgregar={agregarProducto} />
     </main>
   );
 }
-// Usamos filter() porque permite crear una nueva lista sin el producto que queremos eliminar.
+```
