@@ -1,20 +1,12 @@
 
 import { useEffect, useState } from "react";
 
-// ============================================
-// VALORES INICIALES
-// ============================================
-
 const formularioInicial = {
   nombre: "",
   categoria: "",
   precio: "",
   stock: "",
 };
-
-// ============================================
-// COMPONENTE FORMULARIO
-// ============================================
 
 function FormularioProducto({
   onAgregar,
@@ -23,17 +15,8 @@ function FormularioProducto({
   onCancelar,
 }) {
 
-  // ==========================================
-  // ESTADO DEL FORMULARIO
-  // ==========================================
-
   const [formulario, setFormulario] =
     useState(formularioInicial);
-
-  // ==========================================
-  // MISIÓN 5:
-  // CARGAR PRODUCTO PARA EDITAR
-  // ==========================================
 
   useEffect(() => {
 
@@ -63,10 +46,6 @@ function FormularioProducto({
 
   }, [productoEditando]);
 
-  // ==========================================
-  // CAMBIAR CAMPOS
-  // ==========================================
-
   const manejarCambio = (evento) => {
 
     const {
@@ -83,17 +62,11 @@ function FormularioProducto({
     );
   };
 
-  // ==========================================
-  // ENVIAR FORMULARIO
-  // ==========================================
 
   const manejarEnvio = (evento) => {
 
     evento.preventDefault();
 
-    // ========================================
-    // VALIDACIÓN
-    // ========================================
 
     if (
       formulario.nombre.trim() === "" ||
@@ -131,10 +104,6 @@ function FormularioProducto({
       return;
     }
 
-    // ========================================
-    // EDITAR PRODUCTO
-    // ========================================
-
     if (productoEditando) {
 
       const productoActualizado = {
@@ -160,10 +129,6 @@ function FormularioProducto({
 
     } else {
 
-      // ======================================
-      // AGREGAR PRODUCTO
-      // ======================================
-
       const nuevoProducto = {
 
         id: Date.now(),
@@ -186,15 +151,11 @@ function FormularioProducto({
       );
     }
 
-    // Limpiar formulario
     setFormulario(
       formularioInicial
     );
   };
 
-  // ==========================================
-  // CANCELAR EDICIÓN
-  // ==========================================
 
   const manejarCancelar = () => {
 
@@ -207,10 +168,6 @@ function FormularioProducto({
     }
   };
 
-  // ==========================================
-  // INTERFAZ
-  // ==========================================
-
   return (
     <section className="form-section">
 
@@ -219,15 +176,12 @@ function FormularioProducto({
         className="product-form"
       >
 
-        {/* TÍTULO */}
-
         <h2>
           {productoEditando
             ? "Editar producto"
             : "Agregar producto"}
         </h2>
 
-        {/* NOMBRE */}
 
         <div className="form-group">
 
@@ -250,7 +204,6 @@ function FormularioProducto({
 
         </div>
 
-        {/* CATEGORÍA */}
 
         <div className="form-group">
 
@@ -273,7 +226,6 @@ function FormularioProducto({
 
         </div>
 
-        {/* PRECIO */}
 
         <div className="form-group">
 
@@ -297,8 +249,6 @@ function FormularioProducto({
 
         </div>
 
-        {/* STOCK */}
-
         <div className="form-group">
 
           <label htmlFor="stock">
@@ -321,7 +271,6 @@ function FormularioProducto({
 
         </div>
 
-        {/* BOTONES */}
 
         <div className="form-actions">
 

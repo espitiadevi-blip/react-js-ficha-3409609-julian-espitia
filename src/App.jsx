@@ -5,7 +5,7 @@ import FormularioProducto from "./components/FormularioProducto";
 import "./App.css";
 
 function App() {
-  
+
   const obtenerProductosGuardados = () => {
     const productosGuardados =
       localStorage.getItem("inventario");
@@ -50,7 +50,6 @@ function App() {
 
   const [orden, setOrden] = useState("");
 
-  
   const [mensaje, setMensaje] = useState("");
 
   const mostrarMensaje = (texto) => {
@@ -60,7 +59,9 @@ function App() {
       setMensaje("");
     }, 3000);
   };
+
   const agregarProducto = (nuevoProducto) => {
+
     setProductos((productosActuales) => [
       ...productosActuales,
       nuevoProducto,
@@ -74,6 +75,7 @@ function App() {
   const actualizarProducto = (
     productoActualizado
   ) => {
+
     setProductos((productosActuales) =>
       productosActuales.map((producto) =>
         producto.id === productoActualizado.id
@@ -88,8 +90,8 @@ function App() {
       "Producto actualizado correctamente."
     );
   };
-
   const eliminarProducto = (id) => {
+
     const confirmar = window.confirm(
       "¿Estás seguro de que deseas eliminar este producto?"
     );
@@ -108,11 +110,13 @@ function App() {
       "Producto eliminado correctamente."
     );
   };
-
   const modificarStock = (id, cambio) => {
+
     setProductos((productosActuales) =>
       productosActuales.map((producto) => {
+
         if (producto.id === id) {
+
           return {
             ...producto,
             stock: Math.max(
@@ -120,6 +124,7 @@ function App() {
               Number(producto.stock) + cambio
             ),
           };
+
         }
 
         return producto;
@@ -130,26 +135,27 @@ function App() {
       "Stock actualizado correctamente."
     );
   };
-
   const iniciarEdicion = (producto) => {
     setProductoEditando(producto);
   };
+
 
   const cancelarEdicion = () => {
     setProductoEditando(null);
   };
 
   const normalizarTexto = (texto) => {
+
     return String(texto)
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase();
+
   };
-
-
   const productosFiltrados = productos.filter(
     (producto) => {
 
+      
       const nombreProducto =
         normalizarTexto(producto.nombre);
 
@@ -157,26 +163,34 @@ function App() {
         normalizarTexto(busqueda);
 
       const coincideBusqueda =
-        nombreProducto.includes(textoBusqueda);
+        nombreProducto.includes(
+          textoBusqueda
+        );
 
       const coincideCategoria =
         categoria === "Todas" ||
         producto.categoria === categoria;
 
+
       const stock = Number(producto.stock);
 
       const coincideEstado =
         estadoStock === "Todos" ||
-        (estadoStock === "Disponibles" &&
-          stock > 0) ||
-        (estadoStock === "Agotados" &&
-          stock === 0);
+        (
+          estadoStock === "Disponibles" &&
+          stock > 0
+        ) ||
+        (
+          estadoStock === "Agotados" &&
+          stock === 0
+        );
 
       return (
         coincideBusqueda &&
         coincideCategoria &&
         coincideEstado
       );
+
     }
   );
 
@@ -185,44 +199,97 @@ function App() {
   ];
 
   if (orden === "nombre") {
+
     productosOrdenados.sort((a, b) =>
       normalizarTexto(a.nombre).localeCompare(
         normalizarTexto(b.nombre)
       )
     );
+
   }
 
   if (orden === "precio-asc") {
+
     productosOrdenados.sort(
       (a, b) =>
         Number(a.precio) -
         Number(b.precio)
     );
+
   }
 
   if (orden === "precio-desc") {
+
     productosOrdenados.sort(
       (a, b) =>
         Number(b.precio) -
         Number(a.precio)
     );
+
   }
 
   if (orden === "stock-asc") {
+
     productosOrdenados.sort(
       (a, b) =>
         Number(a.stock) -
         Number(b.stock)
     );
+
   }
 
   if (orden === "stock-desc") {
+
     productosOrdenados.sort(
       (a, b) =>
         Number(b.stock) -
         Number(a.stock)
     );
+
   }
+
+  const vaciarInventario = () => {
+
+    if (productos.length === 0) {
+
+      mostrarMensaje(
+        "El inventario ya está vacío."
+      );
+
+      return;
+    }
+
+    const confirmar = window.confirm(
+      "¿Estás seguro de que deseas vaciar todo el inventario?"
+    );
+
+    if (!confirmar) {
+      return;
+    }
+
+    setProductos([]);
+
+    setBusqueda("");
+    setCategoria("Todas");
+    setEstadoStock("Todos");
+    setOrden("");
+
+    mostrarMensaje(
+      "Inventario vaciado correctamente."
+    );
+  };
+
+  const limpiarFiltros = () => {
+
+    setBusqueda("");
+    setCategoria("Todas");
+    setEstadoStock("Todos");
+    setOrden("");
+
+    mostrarMensaje(
+      "Filtros limpiados correctamente."
+    );
+  };
 
   return (
     <main className="container">
@@ -240,17 +307,18 @@ function App() {
       </header>
 
       {mensaje && (
+
         <div
           className="status-message"
           role="status"
         >
           {mensaje}
         </div>
+
       )}
 
       <section className="toolbar">
 
-        
 
         <input
           type="text"
@@ -258,17 +326,20 @@ function App() {
           placeholder="Buscar producto..."
           value={busqueda}
           onChange={(evento) =>
-            setBusqueda(evento.target.value)
+            setBusqueda(
+              evento.target.value
+            )
           }
         />
 
-    
 
         <select
           className="select-input"
           value={categoria}
           onChange={(evento) =>
-            setCategoria(evento.target.value)
+            setCategoria(
+              evento.target.value
+            )
           }
         >
 
@@ -294,12 +365,14 @@ function App() {
 
         </select>
 
-        
+
         <select
           className="select-input"
           value={estadoStock}
           onChange={(evento) =>
-            setEstadoStock(evento.target.value)
+            setEstadoStock(
+              evento.target.value
+            )
           }
         >
 
@@ -317,13 +390,13 @@ function App() {
 
         </select>
 
-        {/* ORDENAMIENTO */}
-
         <select
           className="select-input"
           value={orden}
           onChange={(evento) =>
-            setOrden(evento.target.value)
+            setOrden(
+              evento.target.value
+            )
           }
         >
 
@@ -353,11 +426,31 @@ function App() {
 
         </select>
 
+
+        <button
+          type="button"
+          className="btn-clear-filters"
+          onClick={limpiarFiltros}
+        >
+          Limpiar filtros
+        </button>
+
       </section>
 
-      {/* ========================================
-          LISTA DE PRODUCTOS
-          ======================================== */}
+
+      <section className="inventory-actions">
+
+
+        <button
+          type="button"
+          className="btn-empty-inventory"
+          onClick={vaciarInventario}
+        >
+          Vaciar inventario
+        </button>
+
+      </section>
+
 
       <section className="catalog-section">
 
@@ -411,9 +504,6 @@ function App() {
 
       </section>
 
-      {/* ========================================
-          FORMULARIO
-          ======================================== */}
 
       <FormularioProducto
         onAgregar={agregarProducto}
