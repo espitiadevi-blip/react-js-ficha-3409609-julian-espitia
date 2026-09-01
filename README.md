@@ -26,3 +26,16 @@ La aplicación ahora permite:
 - Modificar stock
 - Calcular inventario dinámicamente
 - Gestionar estado con useState
+
+## CAMBIOS:
+
+localStorage
+JSON.stringify()
+JSON.parse()
+useEffect()
+edición
+filtros
+búsqueda
+ordenamiento
+retos realizados
+comandos de ejecución
