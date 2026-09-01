@@ -1,4 +1,3 @@
-```jsx
 import { productos as productosIniciales } from "./data/productos";
 import { ProductoCard } from "./components/ProductoCard";
 import "./App.css";
@@ -195,4 +194,3 @@ export default function App() {
     </main>
   );
 }
-```
