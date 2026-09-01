@@ -2,323 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
-
-body {
-    background-color: #06080d;
-    color: #ffffff;
-    min-height: 100vh;
-    padding: 32px 24px;
-}
-
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-}
-
-/* Encabezados principales */
-.header h1 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-align: center;
-}
-
-.catalog-section h2,
-.form-section-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #ffffff;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Toolbar de Filtros */
-.toolbar {
-    background-color: #0f1522;
-    border: 1px solid #1a2336;
-    border-radius: 10px;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-}
-
-.search-input {
-    flex: 1;
-    min-width: 220px;
-    background-color: #ffffff;
-    border: 1px solid #ffffff;
-    color: #000000;
-    padding: 10px 14px;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    outline: none;
-}
-
-.search-input::placeholder {
-    color: #64748b;
-}
-
-.select-input {
-    background-color: #162032;
-    border: 1px solid #25334d;
-    color: #ffffff;
-    padding: 10px 14px;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    outline: none;
-    cursor: pointer;
-}
-
-.checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    color: #94a3b8;
-    cursor: pointer;
-}
-
-.btn-clean {
-    background-color: #162032;
-    border: 1px solid #25334d;
-    color: #94a3b8;
-    font-size: 0.85rem;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-left: auto;
-    transition: background-color 0.2s;
-}
-
-.btn-clean:hover {
-    background-color: #23324d;
-    color: #ffffff;
-}
-
-/* Tarjetas KPI */
-.kpi-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
-}
-
-.kpi-card {
-    background-color: #0f1522;
-    border: 1px solid #1a2336;
-    border-radius: 10px;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    text-align: center;
-}
-
-.kpi-label {
-    font-size: 0.85rem;
-    color: #94a3b8;
-}
-
-.kpi-value {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #00e5ff;
-}
-
-/* Grid de Productos */
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-/* Tarjeta individual de Producto */
-.product-card {
-    background-color: #0f1522;
-    border: 1px solid #1a2336;
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.product-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #ffffff;
-}
-
-.badge {
-    font-size: 0.65rem;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 12px;
-    letter-spacing: 0.5px;
-}
-
-.badge.disponible {
-    background-color: rgba(16, 185, 129, 0.15);
-    color: #10b981;
-}
-
-.badge.agotado {
-    background-color: rgba(239, 68, 68, 0.15);
-    color: #ef4444;
-}
-
-/* Información del Producto y Controles de Stock */
-.product-info {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.product-info p {
-    font-size: 0.85rem;
-    color: #94a3b8;
-    display: flex;
-    justify-content: space-between;
-}
-
-.product-info span {
-    color: #cbd5e0;
-}
-
-.stock-control {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    color: #94a3b8;
-}
-
-.stock-buttons {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-}
-
-.stock-btn {
-    background-color: #1e293b;
-    border: 1px solid #334155;
-    color: #ffffff;
-    width: 24px;
-    height: 24px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* Botón Eliminar en la tarjeta */
-.btn-delete {
-    width: 100%;
-    background-color: #141a29;
-    border: 1px solid #3f1717;
-    color: #ff4d4d;
-    padding: 8px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-delete:hover {
-    background-color: #2a1212;
-}
-
-/* Pie de Tarjeta */
-.card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-}
-
-.product-price {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #ffffff;
-}
-
-.btn-action {
-    background-color: #00e5ff;
-    border: none;
-    color: #06080d;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.btn-action:disabled {
-    background-color: transparent;
-    border: 1px solid #1e293b;
-    color: #475569;
-    cursor: not-allowed;
-}
-
-/* Formulario inferior (Agregar producto) */
-.form-container {
-    background-color: #0f1522;
-    border: 1px solid #1a2336;
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-}
-
-.form-container input {
-    flex: 1;
-    background-color: #ffffff;
-    border: 1px solid #ffffff;
-    color: #000000;
-    padding: 10px 14px;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    outline: none;
-}
-
-.form-container input::placeholder {
-    color: #64748b;
-}
-
-.btn-submit {
-    background-color: #ffffff;
-    border: none;
-    color: #000000;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    cursor: pointer;
-    white-space: nowrap;
-}
-/* ==========================================
-   ESTILOS GENERALES Y RESET
-   ========================================== */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 body {
@@ -336,9 +20,6 @@ body {
     gap: 24px;
 }
 
-/* ==========================================
-   ENCABEZADO
-   ========================================== */
 .header {
     text-align: center;
     margin-bottom: 8px;
@@ -351,9 +32,6 @@ body {
     letter-spacing: -0.5px;
 }
 
-/* ==========================================
-   BARRA SUPERIOR (TOOLBAR / FILTROS)
-   ========================================== */
 .toolbar {
     background-color: #0e1422;
     border: 1px solid #1a233a;
@@ -365,7 +43,6 @@ body {
     flex-wrap: wrap;
 }
 
-/* Campo de búsqueda blanco */
 .search-input {
     background-color: #ffffff;
     color: #0f172a;
@@ -382,7 +59,6 @@ body {
     color: #64748b;
 }
 
-/* Desplegable de categoría */
 .select-input {
     background-color: #121a2d;
     border: 1px solid #23314d;
@@ -394,7 +70,6 @@ body {
     cursor: pointer;
 }
 
-/* Checkbox */
 .checkbox-label {
     display: flex;
     align-items: center;
@@ -409,7 +84,6 @@ body {
     cursor: pointer;
 }
 
-/* Botón limpiar filtros */
 .btn-clean {
     background-color: #121a2d;
     border: 1px solid #23314d;
@@ -427,19 +101,10 @@ body {
     color: #ffffff;
 }
 
-/* ==========================================
-   TARJETAS KPI (INDICADORES)
-   ========================================== */
 .kpi-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-}
-
-@media (max-width: 768px) {
-    .kpi-container {
-        grid-template-columns: 1fr;
-    }
 }
 
 .kpi-card {
@@ -460,16 +125,12 @@ body {
     color: #94a3b8;
 }
 
-/* Números resaltados en cian */
 .kpi-value {
     font-size: 2.2rem;
     font-weight: 800;
     color: #00d8f6;
 }
 
-/* ==========================================
-   CATÁLOGO DE PRODUCTOS (GRID)
-   ========================================== */
 .catalog-section {
     display: flex;
     flex-direction: column;
@@ -491,21 +152,6 @@ form h2 {
     gap: 20px;
 }
 
-@media (max-width: 900px) {
-    .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    .products-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* ==========================================
-   TARJETA DE PRODUCTO INDIVIDUAL
-   ========================================== */
 .product-card {
     background-color: #0e1422;
     border: 1px solid #1a233a;
@@ -529,7 +175,6 @@ form h2 {
     color: #ffffff;
 }
 
-/* Badges de estado */
 .badge {
     font-size: 0.65rem;
     font-weight: 800;
@@ -550,7 +195,6 @@ form h2 {
     border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
-/* Información del producto */
 .product-info {
     display: flex;
     flex-direction: column;
@@ -570,7 +214,6 @@ form h2 {
     color: #ffffff;
 }
 
-/* Botones de incremento/decremento de stock */
 .product-info button {
     background-color: #182238;
     border: 1px solid #2a3a5c;
@@ -587,8 +230,6 @@ form h2 {
     background-color: #273659;
 }
 
-/* Botón Eliminar dentro de la tarjeta */
-.product-card > button,
 .btn-delete {
     background-color: #121726;
     border: 1px solid #202a40;
@@ -601,13 +242,11 @@ form h2 {
     transition: all 0.2s ease;
 }
 
-.product-card > button:hover,
 .btn-delete:hover {
     background-color: rgba(239, 68, 68, 0.15);
     border-color: rgba(239, 68, 68, 0.4);
 }
 
-/* Pie de la tarjeta (Precio y Botón Acción) */
 .card-footer {
     display: flex;
     justify-content: space-between;
@@ -621,7 +260,6 @@ form h2 {
     color: #ffffff;
 }
 
-/* Botón principal de acción */
 .btn-action {
     background-color: #00d8f6;
     border: none;
@@ -631,9 +269,7 @@ form h2 {
     border-radius: 8px;
     font-size: 0.85rem;
     cursor: pointer;
-    transition:
-        transform 0.1s ease,
-        opacity 0.2s ease;
+    transition: transform 0.1s ease, opacity 0.2s ease;
 }
 
 .btn-action:hover:not(:disabled) {
@@ -648,9 +284,6 @@ form h2 {
     cursor: not-allowed;
 }
 
-/* ==========================================
-   FORMULARIO DE AGREGAR PRODUCTO
-   ========================================== */
 form {
     background-color: #0e1422;
     border: 1px solid #1a233a;
@@ -663,7 +296,6 @@ form {
     margin-top: 16px;
 }
 
-/* Inputs blancos dentro del formulario */
 form input {
     background-color: #ffffff;
     color: #0f172a;
@@ -680,7 +312,6 @@ form input::placeholder {
     color: #64748b;
 }
 
-/* Botón blanco de agregar */
 form button[type="submit"] {
     background-color: #ffffff;
     color: #000000;
@@ -696,3 +327,28 @@ form button[type="submit"] {
 form button[type="submit"]:hover {
     opacity: 0.9;
 }
+
+.no-results {
+    text-align: center;
+    color: #94a3b8;
+    padding: 30px;
+}
+
+@media (max-width: 900px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .kpi-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
