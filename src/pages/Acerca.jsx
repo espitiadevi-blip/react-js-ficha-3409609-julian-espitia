@@ -10,7 +10,6 @@ function Acerca() {
           </p>
         </div>
       </div>
-
       <div className="about-content">
         <div className="about-card">
           <span className="card-icon">📦</span>
@@ -21,7 +20,7 @@ function Acerca() {
           </p>
         </div>
 
-        <div className="about-card">
+        <div lassName="about-card">
           <span className="card-icon">🔎</span>
           <h2>Búsqueda y filtros</h2>
           <p>
@@ -29,7 +28,6 @@ function Acerca() {
             fácilmente cuáles están disponibles o agotados.
           </p>
         </div>
-
         <div className="about-card">
           <span className="card-icon">📊</span>
           <h2>Control de inventario</h2>
@@ -39,10 +37,8 @@ function Acerca() {
           </p>
         </div>
       </div>
-
       <div className="about-info">
         <h2>¿Qué puedes hacer?</h2>
-
         <div className="features-list">
           <div>✓ Agregar nuevos productos</div>
           <div>✓ Editar productos existentes</div>
@@ -52,7 +48,6 @@ function Acerca() {
           <div>✓ Filtrar y ordenar el inventario</div>
         </div>
       </div>
-
       <div className="about-footer">
         <h2>Tienda Tecnológica</h2>
         <p>
