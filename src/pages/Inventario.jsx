@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-// Fíjate que agregamos "../" porque estamos dentro de la carpeta "pages"
 import { productos as productosIniciales } from "../data/productos";
 import { ProductoCard } from "../components/ProductoCard";
 import FormularioProducto from "../components/FormularioProducto";
-
 function Inventario() {
   const obtenerProductosGuardados = () => {
     const productosGuardados = localStorage.getItem("inventario");
-
     if (productosGuardados) {
       try {
         return JSON.parse(productosGuardados);
@@ -18,9 +15,7 @@ function Inventario() {
     }
     return productosIniciales;
   };
-
   const [productos, setProductos] = useState(obtenerProductosGuardados);
-
   useEffect(() => {
     localStorage.setItem("inventario", JSON.stringify(productos));
   }, [productos]);

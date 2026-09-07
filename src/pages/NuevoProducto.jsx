@@ -8,17 +8,21 @@ function NuevoProducto() {
     productosGuardados.push(nuevoProducto);
     localStorage.setItem(
       "productos",
+      
       JSON.stringify(productosGuardados)
     );
     navigate("/inventario");
   };
   return (    
+
     <section>
       <h1>Nuevo Producto</h1>
       <FormularioProducto
         onAgregar={agregarProducto}
       />
     </section>
+
   );
 }
+
 export default NuevoProducto;
