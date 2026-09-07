@@ -12,19 +12,20 @@ function App() {
   return (
     <main className="container">
       <NavBar />
-      <Routes>
-        <Route path="/" element={<Inicio />} />
-        <Route path="/Inventario" element={<Inventario />} />
-        <Route path="/NuevoProducto" element={<NuevoProducto />} />
-        <Route path="/Acerca" element={<Acerca />} />
-        <Route path="/DetalleProducto" element={<DetalleProducto />} />
-        <Route
-  path="/productos/:id"
-  element={<DetalleProducto productos={productos} />}
-/>
-        {/* Cambié /NoEncontrado a * para que capture cualquier URL que no exista */}
-        <Route path="*" element={<NoEncontrado />} />
-      </Routes>
+     
+<Routes>
+  <Route path="/" element={<Inicio />} />
+  <Route path="/Inventario" element={<Inventario />} />
+  <Route path="/NuevoProducto" element={<NuevoProducto />} />
+  <Route
+    path="/productos/:id"
+    element={<DetalleProducto productos={productos} />}
+  />
+  <Route path="/Acerca" element={<Acerca />} />
+  <Route path="*" element={<NoEncontrado />} />
+</Routes>
+
+
     </main>
   );
 }

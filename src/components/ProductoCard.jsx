@@ -1,6 +1,4 @@
-<NavLink to={`/productos/${producto.id}`}>
-  Ver detalle
-</NavLink>
+import { NavLink } from "react-router-dom";
 export const ProductoCard = ({
   producto,
   onEliminar,
@@ -121,15 +119,12 @@ export const ProductoCard = ({
           ${precioFormateado}
         </span>
 
-        <button
-          type="button"
-          className="btn-action"
-          disabled={!esDisponible}
-        >
-          {esDisponible
-            ? "Ver producto"
-            : "Agotado"}
-        </button>
+        <NavLink
+  to={`/productos/${producto.id}`}
+  className="btn-action"
+>
+  Ver producto
+</NavLink>
 
       </div>
 
