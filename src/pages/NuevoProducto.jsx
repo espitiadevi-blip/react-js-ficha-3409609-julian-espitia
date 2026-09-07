@@ -9,15 +9,12 @@ function NuevoProducto() {
       JSON.parse(localStorage.getItem("productos")) || [];
 
     productosGuardados.push(nuevoProducto);
-
     localStorage.setItem(
       "productos",
       JSON.stringify(productosGuardados)
     );
-
     navigate("/inventario");
   };
-
   return (    
     <section>
       <h1>Nuevo Producto</h1>
