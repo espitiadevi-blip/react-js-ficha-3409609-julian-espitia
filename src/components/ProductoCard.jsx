@@ -1,4 +1,6 @@
-
+<NavLink to={`/productos/${producto.id}`}>
+  Ver detalle
+</NavLink>
 export const ProductoCard = ({
   producto,
   onEliminar,
