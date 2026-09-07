@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom"; // (Recuerda que suele ser react-router-dom)
 import NavBar from "./components/Navbar";
+import Footer from "./components/footer";
 import Inicio from "./pages/Inicio";
 import Inventario from "./pages/Inventario";
 import NuevoProducto from "./pages/NuevoProducto";
@@ -26,6 +27,16 @@ function App() {
 </Routes>
 
 
+      <Routes>
+        <Route path="/" element={<Inicio />} />
+        <Route path="/Inventario" element={<Inventario />} />
+        <Route path="/NuevoProducto" element={<NuevoProducto />} />
+        <Route path="/Acerca" element={<Acerca />} />
+        <Route path="/DetalleProducto" element={<DetalleProducto />} />
+        {/* Cambié /NoEncontrado a * para que capture cualquier URL que no exista */}
+        <Route path="*" element={<NoEncontrado />} />
+      </Routes>
+      <Footer />
     </main>
   );
 }
