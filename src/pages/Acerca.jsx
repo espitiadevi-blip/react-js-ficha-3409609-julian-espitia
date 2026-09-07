@@ -59,5 +59,4 @@ function Acerca() {
     </section>
   );
 }
-
 export default Acerca;
