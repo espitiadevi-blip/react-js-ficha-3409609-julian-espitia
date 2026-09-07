@@ -1,70 +1,57 @@
 import { NavLink } from "react-router-dom";
+
 export const ProductoCard = ({
   producto,
   onEliminar,
   onModificarStock,
   onEditar,
 }) => {
-
   const {
     nombre,
     categoria,
     precio,
     stock,
   } = producto;
-  const esDisponible = stock > 0;
 
-  const precioFormateado = precio
-    ? Number(precio).toLocaleString("es-CO")
-    : "-";
+  const esDisponible = Number(stock) > 0;
+
+  const precioFormateado =
+    precio !== null && precio !== undefined
+      ? Number(precio).toLocaleString("es-CO")
+      : "-";
 
   return (
     <article className="product-card">
-
       <div className="card-header">
-
         <h3 className="product-title">
           {nombre}
         </h3>
 
         <span
           className={`badge ${
-            esDisponible
-              ? "disponible"
-              : "agotado"
+            esDisponible ? "disponible" : "agotado"
           }`}
         >
-          {esDisponible
-            ? "DISPONIBLE"
-            : "AGOTADO"}
+          {esDisponible ? "DISPONIBLE" : "AGOTADO"}
         </span>
-
       </div>
 
-
       <div className="product-info">
-
         <p>
           Categoría:
           <span>{categoria}</span>
         </p>
 
-
         <div className="stock-row">
-
           <span>
-            Stock: {stock}
+            Stock: {stock !== null ? stock : 0}
           </span>
 
           <div>
-
             <button
               type="button"
               onClick={() =>
-                onModificarStock(
-                  producto.id,
-                  -1
-                )
+                onModificarStock(producto.id, -1)
               }
             >
               -
@@ -73,29 +60,20 @@ export const ProductoCard = ({
             <button
               type="button"
               onClick={() =>
-                onModificarStock(
-                  producto.id,
-                  1
-                )
+                onModificarStock(producto.id, 1)
               }
             >
               +
             </button>
-
           </div>
-
         </div>
-
       </div>
 
       <div className="card-actions">
-
         <button
           type="button"
           className="btn-edit"
-          onClick={() =>
-            onEditar(producto)
-          }
+          onClick={() => onEditar(producto)}
         >
           Editar
         </button>
@@ -103,31 +81,24 @@ export const ProductoCard = ({
         <button
           type="button"
           className="btn-delete"
-          onClick={() =>
-            onEliminar(producto.id)
-          }
+          onClick={() => onEliminar(producto.id)}
         >
           Eliminar
         </button>
-
       </div>
 
-
       <div className="card-footer">
-
         <span className="product-price">
           ${precioFormateado}
         </span>
 
         <NavLink
-  to={`/productos/${producto.id}`}
-  className="btn-action"
->
-  Ver producto
-</NavLink>
-
+          to={`/productos/${producto.id}`}
+          className="btn-action"
+        >
+          Ver producto
+        </NavLink>
       </div>
-
     </article>
   );
 };

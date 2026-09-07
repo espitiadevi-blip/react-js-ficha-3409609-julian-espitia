@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 
 function NoEncontrado() {
   return (
@@ -16,6 +16,7 @@ function NoEncontrado() {
 
       <div className="error-box">
         <span>💡</span>
+
         <p>
           No te preocupes, puedes regresar al inicio y continuar
           explorando nuestra tienda tecnológica.
@@ -23,11 +24,17 @@ function NoEncontrado() {
       </div>
 
       <div className="error-actions">
-        <NavLink className="page-link primary-link" to="/">
+        <NavLink
+          className="page-link primary-link"
+          to="/"
+        >
           🏠 Volver a Inicio
         </NavLink>
 
-        <NavLink className="page-link secondary-link" to="/inventario">
+        <NavLink
+          className="page-link secondary-link"
+          to="/Inventario"
+        >
           📦 Ver Inventario
         </NavLink>
       </div>

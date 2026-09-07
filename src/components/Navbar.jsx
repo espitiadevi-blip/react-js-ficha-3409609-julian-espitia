@@ -5,7 +5,6 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-md sticky-top custom-navbar border-bottom-custom">
       <div className="container-xl">
-        {/* Logo y título */}
         <NavLink
           className="navbar-brand d-flex align-items-center gap-2 text-decoration-none"
           to="/"
@@ -13,12 +12,12 @@ function Navbar() {
           <div className="logo-box d-flex align-items-center justify-content-center">
             <Cpu className="icon-sm text-accent" />
           </div>
+
           <span className="text-white fw-semibold mb-0">
             Tienda Tecnológica
           </span>
         </NavLink>
 
-        {/* Botón hamburguesa para móviles */}
         <button
           className="navbar-toggler custom-toggler"
           type="button"
@@ -28,8 +27,7 @@ function Navbar() {
           <Menu className="text-muted-custom" />
         </button>
 
-        {/* Enlaces de navegación */}
-        <div className="collapse navbar-collapse " id="navbarNav">
+        <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav mx-auto gap-md-4 mt-3 mt-md-0">
             <li className="nav-item">
               <NavLink
@@ -39,6 +37,7 @@ function Navbar() {
                 Inicio
               </NavLink>
             </li>
+
             <li className="nav-item">
               <NavLink
                 className="nav-link text-muted-custom custom-nav-link"
@@ -47,6 +46,7 @@ function Navbar() {
                 Inventario
               </NavLink>
             </li>
+
             <li className="nav-item">
               <NavLink
                 className="nav-link text-muted-custom custom-nav-link"
@@ -55,6 +55,7 @@ function Navbar() {
                 Nuevo Producto
               </NavLink>
             </li>
+
             <li className="nav-item">
               <NavLink
                 className="nav-link text-muted-custom custom-nav-link"

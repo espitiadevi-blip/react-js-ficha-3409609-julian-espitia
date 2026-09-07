@@ -256,12 +256,7 @@ function Inventario() {
         </div>
       </section>
 
-      <FormularioProducto
-        onAgregar={agregarProducto}
-        productoEditando={productoEditando}
-        onActualizar={actualizarProducto}
-        onCancelar={cancelarEdicion}
-      />
+  
     </div>
   );
 }
