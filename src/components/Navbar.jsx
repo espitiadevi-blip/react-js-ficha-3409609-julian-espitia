@@ -13,9 +13,7 @@ function Navbar() {
             <Cpu className="icon-sm text-accent" />
           </div>
 
-          <span className="text-white fw-semibold mb-0">
-            Tienda Tecnológica
-          </span>
+          <span className="text-white fw-semibold mb-0">Inventix</span>
         </NavLink>
 
         <button

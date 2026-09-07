@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { productos as productosIniciales } from "../data/productos";
 import { ProductoCard } from "../components/ProductoCard";
 import FormularioProducto from "../components/FormularioProducto";
+
 function Inventario() {
   const obtenerProductosGuardados = () => {
     const productosGuardados = localStorage.getItem("inventario");
+
     if (productosGuardados) {
       try {
         return JSON.parse(productosGuardados);
@@ -13,13 +15,11 @@ function Inventario() {
         localStorage.removeItem("inventario");
       }
     }
+
     return productosIniciales;
   };
-  const [productos, setProductos] = useState(obtenerProductosGuardados);
-  useEffect(() => {
-    localStorage.setItem("inventario", JSON.stringify(productos));
-  }, [productos]);
 
+  const [productos, setProductos] = useState(obtenerProductosGuardados);
   const [productoEditando, setProductoEditando] = useState(null);
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState("Todas");
@@ -27,8 +27,13 @@ function Inventario() {
   const [orden, setOrden] = useState("");
   const [mensaje, setMensaje] = useState("");
 
+  useEffect(() => {
+    localStorage.setItem("inventario", JSON.stringify(productos));
+  }, [productos]);
+
   const mostrarMensaje = (texto) => {
     setMensaje(texto);
+
     setTimeout(() => {
       setMensaje("");
     }, 3000);
@@ -36,15 +41,26 @@ function Inventario() {
 
   const agregarProducto = (nuevoProducto) => {
     setProductos((productosActuales) => [...productosActuales, nuevoProducto]);
+
     mostrarMensaje("Producto agregado correctamente.");
   };
 
   const actualizarProducto = (productoActualizado) => {
-    setProductos((productosActuales) =>
-      productosActuales.map((producto) =>
-        producto.id === productoActualizado.id ? productoActualizado : producto,
-      ),
-    );
+    setProductos((productosActuales) => {
+      const productosActualizados = productosActuales.map((producto) =>
+        producto.id === productoActualizado.id
+          ? {
+              ...producto,
+              ...productoActualizado,
+            }
+          : producto,
+      );
+
+      localStorage.setItem("inventario", JSON.stringify(productosActualizados));
+
+      return productosActualizados;
+    });
+
     setProductoEditando(null);
     mostrarMensaje("Producto actualizado correctamente.");
   };
@@ -61,6 +77,7 @@ function Inventario() {
     setProductos((productosActuales) =>
       productosActuales.filter((producto) => producto.id !== id),
     );
+
     mostrarMensaje("Producto eliminado correctamente.");
   };
 
@@ -73,9 +90,11 @@ function Inventario() {
             stock: Math.max(0, Number(producto.stock) + cambio),
           };
         }
+
         return producto;
       }),
     );
+
     mostrarMensaje("Stock actualizado correctamente.");
   };
 
@@ -97,10 +116,14 @@ function Inventario() {
   const productosFiltrados = productos.filter((producto) => {
     const nombreProducto = normalizarTexto(producto.nombre);
     const textoBusqueda = normalizarTexto(busqueda);
+
     const coincideBusqueda = nombreProducto.includes(textoBusqueda);
+
     const coincideCategoria =
       categoria === "Todas" || producto.categoria === categoria;
+
     const stock = Number(producto.stock);
+
     const coincideEstado =
       estadoStock === "Todos" ||
       (estadoStock === "Disponibles" && stock > 0) ||
@@ -116,15 +139,19 @@ function Inventario() {
       normalizarTexto(a.nombre).localeCompare(normalizarTexto(b.nombre)),
     );
   }
+
   if (orden === "precio-asc") {
     productosOrdenados.sort((a, b) => Number(a.precio) - Number(b.precio));
   }
+
   if (orden === "precio-desc") {
     productosOrdenados.sort((a, b) => Number(b.precio) - Number(a.precio));
   }
+
   if (orden === "stock-asc") {
     productosOrdenados.sort((a, b) => Number(a.stock) - Number(b.stock));
   }
+
   if (orden === "stock-desc") {
     productosOrdenados.sort((a, b) => Number(b.stock) - Number(a.stock));
   }
@@ -139,13 +166,16 @@ function Inventario() {
       "¿Estás seguro de que deseas vaciar todo el inventario?",
     );
 
-    if (!confirmar) return;
+    if (!confirmar) {
+      return;
+    }
 
     setProductos([]);
     setBusqueda("");
     setCategoria("Todas");
     setEstadoStock("Todos");
     setOrden("");
+
     mostrarMensaje("Inventario vaciado correctamente.");
   };
 
@@ -154,13 +184,14 @@ function Inventario() {
     setCategoria("Todas");
     setEstadoStock("Todos");
     setOrden("");
+
     mostrarMensaje("Filtros limpiados correctamente.");
   };
 
   return (
     <div className="inventario-page">
       <header className="header">
-        <h1>Tienda Tecnológica</h1>
+        <h1>Inventix</h1>
         <p>Gestor de inventario</p>
       </header>
 
@@ -256,7 +287,42 @@ function Inventario() {
         </div>
       </section>
 
-  
+      {productoEditando && (
+        <div
+          className="edit-modal-overlay"
+          onMouseDown={(evento) => {
+            if (evento.target === evento.currentTarget) {
+              cancelarEdicion();
+            }
+          }}
+        >
+          <div className="edit-modal">
+            <div className="edit-modal-header">
+              <div>
+                <h2>Editar producto</h2>
+                <p>
+                  Modifica los datos de{" "}
+                  <strong>{productoEditando.nombre}</strong>
+                </p>
+              </div>
+
+              <button
+                type="button"
+                className="edit-modal-close"
+                onClick={cancelarEdicion}
+              >
+                ×
+              </button>
+            </div>
+
+            <FormularioProducto
+              productoEditando={productoEditando}
+              onActualizar={actualizarProducto}
+              onCancelar={cancelarEdicion}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

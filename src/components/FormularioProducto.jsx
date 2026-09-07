@@ -1,18 +1,12 @@
 import { useEffect, useState } from "react";
-import {
-  Package,
-  Tag,
-  DollarSign,
-  Database,
-  Plus,
-} from "lucide-react";
+import { Package, Tag, DollarSign, Database, Plus } from "lucide-react";
 
-const formularioInicial = {
+const obtenerFormularioInicial = () => ({
   nombre: "",
   categoria: "",
   precio: "",
   stock: "",
-};
+});
 
 function FormularioProducto({
   onAgregar,
@@ -20,19 +14,18 @@ function FormularioProducto({
   onActualizar,
   onCancelar,
 }) {
-  const [formulario, setFormulario] =
-    useState(formularioInicial);
+  const [formulario, setFormulario] = useState(obtenerFormularioInicial());
 
   useEffect(() => {
     if (productoEditando) {
       setFormulario({
-        nombre: productoEditando.nombre || "",
-        categoria: productoEditando.categoria || "",
+        nombre: productoEditando.nombre ?? "",
+        categoria: productoEditando.categoria ?? "",
         precio: productoEditando.precio ?? "",
         stock: productoEditando.stock ?? "",
       });
     } else {
-      setFormulario(formularioInicial);
+      setFormulario(obtenerFormularioInicial());
     }
   }, [productoEditando]);
 
@@ -48,9 +41,14 @@ function FormularioProducto({
   const manejarEnvio = (evento) => {
     evento.preventDefault();
 
+    const nombre = formulario.nombre.trim();
+    const categoria = formulario.categoria.trim();
+    const precio = Number(formulario.precio);
+    const stock = Number(formulario.stock);
+
     if (
-      formulario.nombre.trim() === "" ||
-      formulario.categoria.trim() === "" ||
+      nombre === "" ||
+      categoria === "" ||
       formulario.precio === "" ||
       formulario.stock === ""
     ) {
@@ -58,12 +56,12 @@ function FormularioProducto({
       return;
     }
 
-    if (Number(formulario.precio) <= 0) {
+    if (precio <= 0) {
       alert("El precio debe ser mayor que 0.");
       return;
     }
 
-    if (Number(formulario.stock) < 0) {
+    if (stock < 0) {
       alert("El stock no puede ser negativo.");
       return;
     }
@@ -71,30 +69,30 @@ function FormularioProducto({
     if (productoEditando) {
       const productoActualizado = {
         ...productoEditando,
-        nombre: formulario.nombre.trim(),
-        categoria: formulario.categoria.trim(),
-        precio: Number(formulario.precio),
-        stock: Number(formulario.stock),
+        nombre,
+        categoria,
+        precio,
+        stock,
       };
 
       onActualizar(productoActualizado);
     } else {
       const nuevoProducto = {
         id: Date.now(),
-        nombre: formulario.nombre.trim(),
-        categoria: formulario.categoria.trim(),
-        precio: Number(formulario.precio),
-        stock: Number(formulario.stock),
+        nombre,
+        categoria,
+        precio,
+        stock,
       };
 
       onAgregar(nuevoProducto);
     }
 
-    setFormulario(formularioInicial);
+    setFormulario(obtenerFormularioInicial());
   };
 
   const manejarCancelar = () => {
-    setFormulario(formularioInicial);
+    setFormulario(obtenerFormularioInicial());
 
     if (onCancelar) {
       onCancelar();
@@ -102,10 +100,7 @@ function FormularioProducto({
   };
 
   return (
-    <form
-      onSubmit={manejarEnvio}
-      className="modern-product-form"
-    >
+    <form onSubmit={manejarEnvio} className="modern-product-form">
       <div className="form-field">
         <label htmlFor="nombre">
           <Package size={20} />
@@ -173,15 +168,9 @@ function FormularioProducto({
       </div>
 
       <div className="modern-form-actions">
-        <button
-          type="submit"
-          className="modern-submit-button"
-        >
+        <button type="submit" className="modern-submit-button">
           <Plus size={22} />
-
-          {productoEditando
-            ? "Guardar cambios"
-            : "Agregar producto"}
+          {productoEditando ? "Guardar cambios" : "Agregar producto"}
         </button>
 
         {productoEditando && (
@@ -198,4 +187,4 @@ function FormularioProducto({
   );
 }
 
-export default FormularioProducto;  
+export default FormularioProducto;

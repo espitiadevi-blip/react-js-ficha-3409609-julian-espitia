@@ -6,32 +6,21 @@ export const ProductoCard = ({
   onModificarStock,
   onEditar,
 }) => {
-  const {
-    nombre,
-    categoria,
-    precio,
-    stock,
-  } = producto;
+  const nombre = producto?.nombre ?? "";
+  const categoria = producto?.categoria ?? "";
+  const precio = producto?.precio ?? 0;
+  const stock = producto?.stock ?? 0;
 
   const esDisponible = Number(stock) > 0;
 
-  const precioFormateado =
-    precio !== null && precio !== undefined
-      ? Number(precio).toLocaleString("es-CO")
-      : "-";
+  const precioFormateado = Number(precio).toLocaleString("es-CO");
 
   return (
     <article className="product-card">
       <div className="card-header">
-        <h3 className="product-title">
-          {nombre}
-        </h3>
+        <h3 className="product-title">{nombre}</h3>
 
-        <span
-          className={`badge ${
-            esDisponible ? "disponible" : "agotado"
-          }`}
-        >
+        <span className={`badge ${esDisponible ? "disponible" : "agotado"}`}>
           {esDisponible ? "DISPONIBLE" : "AGOTADO"}
         </span>
       </div>
@@ -43,25 +32,19 @@ export const ProductoCard = ({
         </p>
 
         <div className="stock-row">
-          <span>
-            Stock: {stock !== null ? stock : 0}
-          </span>
+          <span>Stock: {stock}</span>
 
           <div>
             <button
               type="button"
-              onClick={() =>
-                onModificarStock(producto.id, -1)
-              }
+              onClick={() => onModificarStock(producto.id, -1)}
             >
               -
             </button>
 
             <button
               type="button"
-              onClick={() =>
-                onModificarStock(producto.id, 1)
-              }
+              onClick={() => onModificarStock(producto.id, 1)}
             >
               +
             </button>
@@ -88,14 +71,9 @@ export const ProductoCard = ({
       </div>
 
       <div className="card-footer">
-        <span className="product-price">
-          ${precioFormateado}
-        </span>
+        <span className="product-price">${precioFormateado}</span>
 
-        <NavLink
-          to={`/productos/${producto.id}`}
-          className="btn-action"
-        >
+        <NavLink to={`/productos/${producto.id}`} className="btn-action">
           Ver producto
         </NavLink>
       </div>
