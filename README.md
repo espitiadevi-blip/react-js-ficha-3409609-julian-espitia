@@ -1,4 +1,4 @@
-# Tienda Tecnológica - Panel de Inventario
+# Inventix - Gestor de Inventario
 
 Aplicación web interactiva para la gestión de productos e inventario de una tienda tecnológica. El sistema permite visualizar productos, consultar sus detalles, agregar nuevos productos, editar información, modificar el stock, realizar búsquedas, aplicar filtros y calcular métricas del inventario de manera dinámica.
 
